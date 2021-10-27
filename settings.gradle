@@ -1,0 +1,5 @@
+
+rootProject.name = "kotlinJetpackDemo"
+include ':app'
+include ':base-wa-library'
+include ':base-library'

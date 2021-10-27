@@ -1,0 +1,24 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+apply from: "../basic.gradle"
+
+android {
+    defaultConfig {
+        applicationId "com.wyq.kotlinjetpackdemo"
+        versionCode Version.versionCode
+        versionName Version.versionName
+        multiDexEnabled true
+    }
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+    implementation project(":base-wa-library")
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "androidx.room:room-compiler:2.2.6"
+}
