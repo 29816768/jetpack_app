@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import com.wyq.kotlinjetpackdemo.constants.Constants
+import com.wyq.kotlinjetpackdemo.play.PlayerManager
 import com.wyq.kotlinjetpackdemo.view.DialogUtils
 import com.zs.base_library.base.BaseVmActivity
 import com.zs.base_library.utils.PrefUtils
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * Date: 2021/10/22 14:43
  * Description:开屏页
  */
-class SplashActicity : BaseVmActivity(),EasyPermissions.PermissionCallbacks{
+class SplashActicity : BaseVmActivity(), EasyPermissions.PermissionCallbacks {
 
     private var disposable: Disposable? = null
     private val tips = "玩安卓现在要向您申请存储权限，用于访问您的本地音乐，您也可以在设置中手动开启或者取消。"
@@ -38,13 +39,13 @@ class SplashActicity : BaseVmActivity(),EasyPermissions.PermissionCallbacks{
     /**
      * 申请权限
      */
-    private fun requestPermission(){
+    private fun requestPermission() {
         //已申请
         if (EasyPermissions.hasPermissions(this, *perms)) {
             startIntent()
-        }else{
+        } else {
             //为申请，显示申请提示语
-            DialogUtils.tips(this,tips){
+            DialogUtils.tips(this, tips) {
                 RequestLocationAndCallPermission()
             }
         }
@@ -64,13 +65,13 @@ class SplashActicity : BaseVmActivity(),EasyPermissions.PermissionCallbacks{
     /**
      * 开始倒计时跳转
      */
-    private fun startIntent(){
+    private fun startIntent() {
         //开启服务
         //startService(Intent(this,PlayService::class.java))
-        //PlayerManager.instance.init(this)
+        PlayerManager.instance.init(this)
         disposable = Observable.timer(2000, TimeUnit.MILLISECONDS)
             .subscribe {
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
     }
@@ -79,7 +80,7 @@ class SplashActicity : BaseVmActivity(),EasyPermissions.PermissionCallbacks{
      * 动态切换主题
      */
     private fun changeTheme() {
-        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY,false)
+        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY, false)
         if (theme) {
             setTheme(R.style.AppTheme_Night)
         } else {
@@ -91,7 +92,7 @@ class SplashActicity : BaseVmActivity(),EasyPermissions.PermissionCallbacks{
      * 沉浸式状态,随主题改变
      */
     override fun setSystemInvadeBlack() {
-        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY,false)
+        val theme = PrefUtils.getBoolean(Constants.SP_THEME_KEY, false)
         if (theme) {
             StatusUtils.setSystemStatus(this, true, false)
         } else {

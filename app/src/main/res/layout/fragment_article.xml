@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/smartRefresh"
+            app:srlEnableLoadMore="false"
+            app:srlEnableLoadMoreWhenContentNotFull="false"
+            app:srlEnableOverScrollDrag="true"
+            app:srlEnableRefresh="false">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rvArticleList"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        <com.zs.base_wa_lib.view.LoadingTip
+            android:id="@+id/loadingTip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+</layout>
