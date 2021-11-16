@@ -45,6 +45,10 @@ class HomeVM :BaseViewModel() {
         }
     }
 
+    init {
+
+    }
+
     /**
      * 获取首页文章列表， 包括banner
      */

@@ -31,11 +31,12 @@ open class BaseRepository {
     @Deprecated("后期会被剔除")
     constructor(
         coroutineScope: CoroutineScope,
-        errorLiveData: MutableLiveData<ApiException>
+        errorLiveData: MutableLiveData<ApiException>,
     ) {
         this.coroutineScope = coroutineScope
         this.errorLiveData = errorLiveData
     }
+
     constructor()
 
     /**
@@ -46,9 +47,9 @@ open class BaseRepository {
      */
     @Deprecated("关于协程的封装有问题，弃用")
     protected fun <T> launch(
-        block: suspend () -> T
-        , success: suspend (T) -> Unit
-        , error: Error? = null
+        block: suspend () -> T,
+        success: suspend (T) -> Unit,
+        error: Error? = null,
     ): Job {
         return coroutineScope.launch {
             runCatching {
